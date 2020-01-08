@@ -15,4 +15,7 @@ public class AttributeClassifyService {
 	public List<AttributeClassify> list() {
 		return mapper.list();
 	}
+	public int add(int classify_id,String classify_name) {
+		return mapper.add(classify_id, classify_name);
+	}
 }

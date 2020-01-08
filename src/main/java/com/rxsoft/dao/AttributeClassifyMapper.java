@@ -2,6 +2,8 @@ package com.rxsoft.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.rxsoft.bean.AttributeClassify;
 
 /**
@@ -11,4 +13,5 @@ import com.rxsoft.bean.AttributeClassify;
  */
 public interface AttributeClassifyMapper {
 	List<AttributeClassify> list();
+	int add(@Param("classify_id") int classify_id,@Param("classify_name")String classify_name);
 }

@@ -10,8 +10,8 @@
     <select id="list" resultType="AttributeClassify">
     	select * from attribute_classify
     </select>
-    <insert id="insert">
-    	insert into attribute values("",#{attribute_name},#{classify_id})
+    <insert id="add">
+    	insert into attribute_classify values(#{classify_id},#{classify_name})
     </insert>
     <delete id="delete">
     	delete from attribute where classify_id=#{classify_id}

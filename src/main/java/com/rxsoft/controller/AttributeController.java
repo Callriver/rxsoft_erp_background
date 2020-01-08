@@ -67,7 +67,18 @@ public class AttributeController {
 		}else {
 			jsonObj.setStatus_code(99);
 			jsonObj.setMsg("Service Unavailable");
-			jsonObj.setData("Service Unavailable");
+			jsonObj.setData("");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value="/attributeclassify-add" ,method = RequestMethod.POST)
+	public JsonRespObj addAttributeClassify(@RequestParam("classify_id")int classify_id,@RequestParam("classify_name") String classify_name) {
+		int i = classifyService.add(classify_id, classify_name);
+		JsonRespObj jsonObj;
+		if (i==1) {
+			jsonObj=new JsonRespObj(0,"Success","Success");
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
 		}
 		return jsonObj;
 	}
