@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: rxsoftdev
+    url: jdbc:mysql://localhost:3306/yserp?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+    username: root
+mybatis:
+  mapper-locations:
+      classpath*:mybatis/*Mapper.xml
+  type-aliases-package:
+      com.rxsoft.bean
