@@ -5,15 +5,15 @@
 
 
     <update id="update">
-        UPDATE attribute set attribute_name=#{attribute_name},classify_id=#{classify_id} WHERE attribute_id=#{attribute_id}
+        UPDATE attribute set attribute_name=#{attribute_name} WHERE attribute_id=#{attribute_id} and classify_id=#{classify_id}
     </update>
-    <select id="select">
+    <select id="list" resultType="Attribute">
     	select * from attribute where classify_id=#{classify_id}
     </select>
-    <insert id="insert">
-    	insert into attribute values("",#{attribute_name},#{classify_id})
+    <insert id="add">
+    	insert into attribute values(#{attribute_id},#{attribute_name},#{classify_id})
     </insert>
     <delete id="delete">
-    	delete from attribute where classify_id=#{classify_id}
+    	delete from attribute where attribute_id=#{attribute_id} and classify_id=#{classify_id}
     </delete>
 </mapper>

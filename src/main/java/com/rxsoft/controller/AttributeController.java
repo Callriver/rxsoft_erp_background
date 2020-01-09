@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.rxsoft.bean.Attribute;
 import com.rxsoft.bean.AttributeClassify;
 import com.rxsoft.bean.JsonRespObj;
 import com.rxsoft.service.AttributeClassifyService;
@@ -48,7 +49,7 @@ public class AttributeController {
 		}else {
 			jsonObj.setStatus_code(99);
 			jsonObj.setMsg("Service Unavailable");
-			jsonObj.setData("Service Unavailable");
+			jsonObj.setData("");
 		}
 		return jsonObj;
 	}
@@ -72,14 +73,93 @@ public class AttributeController {
 		return jsonObj;
 	}
 	@RequestMapping(value="/attributeclassify-add" ,method = RequestMethod.POST)
+	/**
+	 * 增加商品属性分类
+	 * @param classify_id
+	 * @param classify_name
+	 * @return
+	 */
 	public JsonRespObj addAttributeClassify(@RequestParam("classify_id")int classify_id,@RequestParam("classify_name") String classify_name) {
 		int i = classifyService.add(classify_id, classify_name);
 		JsonRespObj jsonObj;
 		if (i==1) {
-			jsonObj=new JsonRespObj(0,"Success","Success");
+			jsonObj=new JsonRespObj(0,"Success","");
 		}else {
 			jsonObj=new JsonRespObj(99,"Service Unavailable","");
 		}
 		return jsonObj;
 	}
+	@RequestMapping(value="/attributeclassify-del" ,method = RequestMethod.POST)
+	/**
+	 * 删除商品属性分类
+	 * @param classify_id
+	 * @return
+	 */
+	public JsonRespObj delAttributeClassify(@RequestParam("classify_id")int classify_id) {
+		int i = classifyService.delete(classify_id);
+		JsonRespObj jsonObj;
+		if (i==1) {
+			jsonObj=new JsonRespObj(0,"Success","");
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value="/attributeclassify-upd" ,method = RequestMethod.POST)
+	/**
+	 * 更新商品属性分类
+	 * @param classify_id
+	 * @param classify_name
+	 * @return
+	 */
+	public JsonRespObj updAttributeClassify(@RequestParam("classify_id")int classify_id,@RequestParam("classify_name") String classify_name) {
+		int i = classifyService.update(classify_id,classify_name);
+		JsonRespObj jsonObj;
+		if (i==1) {
+			jsonObj=new JsonRespObj(0,"Success","");
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value="/attribute-list" ,method = RequestMethod.POST)
+	/**
+	 * 根据属性分类查属性
+	 * @param classify_id
+	 * @return
+	 */
+	public JsonRespObj listAttribute(@RequestParam("classify_id")int classify_id) {
+		List<Attribute> list = service.list(classify_id);
+		JsonRespObj jsonObj;
+		if (list!=null) {
+			jsonObj=new JsonRespObj(0,"Success",list);
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value="/attribute-add" ,method = RequestMethod.POST)
+	public JsonRespObj addAttribute(@RequestParam("attribute_id")int attribute_id,@RequestParam("attribute_name")String attribute_name,@RequestParam("classify_id")int classify_id) {
+		int i = service.add(attribute_id,attribute_name,classify_id);
+		JsonRespObj jsonObj;
+		if (i==1) {
+			jsonObj=new JsonRespObj(0,"Success","");
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value="/attribute-del" ,method = RequestMethod.POST)
+	public JsonRespObj delAttribute(@RequestParam("attribute_id")int attribute_id,@RequestParam("classify_id")int classify_id) {
+		int i = service.delete(attribute_id,classify_id);
+		JsonRespObj jsonObj;
+		if (i==1) {
+			jsonObj=new JsonRespObj(0,"Success","");
+		}else {
+			jsonObj=new JsonRespObj(99,"Service Unavailable","");
+		}
+		return jsonObj;
+	}
+	
 }
+

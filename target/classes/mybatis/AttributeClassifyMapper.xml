@@ -5,7 +5,7 @@
 
 
     <update id="update">
-        UPDATE attribute_classify set attribute_name=#{attribute_name},classify_id=#{classify_id} WHERE attribute_id=#{attribute_id}
+        UPDATE attribute_classify set classify_id=#{classify_id},classify_name=#{classify_name} WHERE classify_id=#{classify_id}
     </update>
     <select id="list" resultType="AttributeClassify">
     	select * from attribute_classify
@@ -14,6 +14,6 @@
     	insert into attribute_classify values(#{classify_id},#{classify_name})
     </insert>
     <delete id="delete">
-    	delete from attribute where classify_id=#{classify_id}
+    	delete from attribute_classify where classify_id=#{classify_id}
     </delete>
 </mapper>

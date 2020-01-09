@@ -14,4 +14,6 @@ import com.rxsoft.bean.AttributeClassify;
 public interface AttributeClassifyMapper {
 	List<AttributeClassify> list();
 	int add(@Param("classify_id") int classify_id,@Param("classify_name")String classify_name);
+	int delete(@Param("classify_id") int classify_id);
+	int update(@Param("classify_id") int classify_id,@Param("classify_name")String classify_name);
 }

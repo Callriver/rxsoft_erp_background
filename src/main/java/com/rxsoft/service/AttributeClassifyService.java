@@ -18,4 +18,10 @@ public class AttributeClassifyService {
 	public int add(int classify_id,String classify_name) {
 		return mapper.add(classify_id, classify_name);
 	}
+	public int delete(int classify_id) {
+		return mapper.delete(classify_id);
+	}
+	public int update(int classify_id,String classify_name) {
+		return mapper.update(classify_id,classify_name);
+	}
 }

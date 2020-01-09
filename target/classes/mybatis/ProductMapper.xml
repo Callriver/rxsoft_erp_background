@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rxsoft.dao.ProductMapper">
+
+
+    <select id="list" resultType="Product">
+    	select p.product_id,p.product_name,p.product_retailprice,p.product_costprice,p.product_deliveryprice,u.unit_name,p.product_image,p.commodity_group,p.entry_date from product p,unit u where p.product_unit=u.unit_id
+    </select>
+
+</mapper>
