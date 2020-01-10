@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `attribute`;
 CREATE TABLE `attribute` (
   `attribute_id` int(11) NOT NULL COMMENT '属性ID',
   `attribute_name` varchar(20) DEFAULT NULL,
-  `classify_id` int(11) DEFAULT NULL COMMENT '属性分类ID',
-  PRIMARY KEY (`attribute_id`)
+  `classify_id` int(11) NOT NULL COMMENT '属性分类ID',
+  PRIMARY KEY (`attribute_id`,`classify_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `attribute` */
@@ -43,7 +43,7 @@ CREATE TABLE `attribute_classify` (
 
 /*Data for the table `attribute_classify` */
 
-insert  into `attribute_classify`(`classify_id`,`classify_name`) values (1,'品牌'),(2,'种类'),(4,'保质期');
+insert  into `attribute_classify`(`classify_id`,`classify_name`) values (1,'品牌'),(2,'分类');
 
 /*Table structure for table `classification` */
 
@@ -151,19 +151,34 @@ CREATE TABLE `position` (
 DROP TABLE IF EXISTS `product`;
 
 CREATE TABLE `product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(50) DEFAULT NULL,
-  `product_retailprice` decimal(10,2) DEFAULT NULL,
-  `product_costprice` decimal(10,2) DEFAULT NULL,
-  `product_deliveryprice` decimal(10,2) DEFAULT NULL,
+  `product_id` int(11) NOT NULL COMMENT '商品编码',
+  `product_name` varchar(50) DEFAULT NULL COMMENT '商品名称',
+  `product_retailprice` decimal(10,2) DEFAULT NULL COMMENT '零售价',
+  `product_costprice` decimal(10,2) DEFAULT NULL COMMENT '进货价',
+  `product_deliveryprice` decimal(10,2) DEFAULT NULL COMMENT '批发价',
   `product_unit` int(10) DEFAULT NULL COMMENT '单位',
-  `product_image` varchar(30) DEFAULT NULL,
+  `product_image` varchar(30) DEFAULT NULL COMMENT '图片路径',
   `commodity_group` int(10) DEFAULT NULL COMMENT '商品组',
   `entry_date` date DEFAULT NULL COMMENT '录入时间',
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `product` */
+
+insert  into `product`(`product_id`,`product_name`,`product_retailprice`,`product_costprice`,`product_deliveryprice`,`product_unit`,`product_image`,`commodity_group`,`entry_date`) values (1,'今麦郎矿泉水','1.00','0.50','0.79',1,'/product/1.jpg',1,'2020-01-09'),(2,'亚太水果罐头','3.00','1.30','1.80',2,'/product/2.jpg',1,'2020-01-09');
+
+/*Table structure for table `product_attribute` */
+
+DROP TABLE IF EXISTS `product_attribute`;
+
+CREATE TABLE `product_attribute` (
+  `classify_id` int(11) NOT NULL COMMENT '商品属性分类id',
+  `product_id` int(11) NOT NULL COMMENT '商品id',
+  `attribute_id` int(11) DEFAULT NULL COMMENT '属性id',
+  PRIMARY KEY (`classify_id`,`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `product_attribute` */
 
 /*Table structure for table `unit` */
 
@@ -176,6 +191,8 @@ CREATE TABLE `unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `unit` */
+
+insert  into `unit`(`unit_id`,`unit_name`) values (1,'瓶'),(2,'箱');
 
 /*Table structure for table `user` */
 

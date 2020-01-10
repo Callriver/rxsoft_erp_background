@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rxsoft.dao.ProductMapper" >
+<mapper namespace="com.rxsoft.dao.ProductAttributeMapper" >
 
-
+<!-- 根据商品id查询商品所有属性分类
+SELECT c.classify_id,c.classify_name
+	FROM product_attribute a,attribute_classify c,product p,attribute a1 
+	WHERE p.product_id=a.product_id 
+		AND c.classify_id=a.classify_id
+		AND a.attribute_id=a1.attribute_id
+		AND a1.classify_id=c.classify_id
+		AND p.product_id=#{product_id}
+根据商品id和属性分类查询该分类商品所有属性
+SELECT a1.attribute_id,a1.attribute_name
+	FROM product_attribute a,attribute_classify c,product p,attribute a1 
+	WHERE p.product_id=a.product_id 
+		AND c.classify_id=a.classify_id
+		AND a.attribute_id=a1.attribute_id
+		AND a1.classify_id=c.classify_id
+		AND p.product_id=#{product_id}
+		AND c.classify_id=#{classify_id} -->
     <select id="list" resultType="Product" >
     	select p.product_id,p.product_name,p.product_retailprice,p.product_costprice,p.product_deliveryprice,u.unit_name,p.product_image,p.commodity_group,p.entry_date from product p,unit u where p.product_unit=u.unit_id
     </select>

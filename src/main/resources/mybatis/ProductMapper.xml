@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rxsoft.dao.ProductMapper">
+<mapper namespace="com.rxsoft.dao.ProductMapper" >
 
 
-    <select id="list" resultType="Product">
+    <select id="list" resultType="Product" >
     	select p.product_id,p.product_name,p.product_retailprice,p.product_costprice,p.product_deliveryprice,u.unit_name,p.product_image,p.commodity_group,p.entry_date from product p,unit u where p.product_unit=u.unit_id
     </select>
-
+    <select id="findProductById" resultType="Product" >
+    	select p.product_id,p.product_name,p.product_retailprice,p.product_costprice,p.product_deliveryprice,u.unit_name,p.product_image,p.commodity_group,p.entry_date from product p,unit u where p.product_unit=u.unit_id and product_id=#{product_id}
+    </select>
+    <insert id="add" >
+		insert into product values(#{product_id},#{product_name},#{product_retailprice},#{product_costprice},#{product_deliveryprice},#{product_unit},#{product_image},#{commodity_group},#{entry_date})
+	</insert>
+	<update id="update">
+		update product set product_name=#{product_name},product_retailprice=#{product_retailprice},product_costprice=#{product_costprice},product_deliveryprice=#{product_deliveryprice},product_unit=#{product_unit},product_image=#{product_image},commodity_group=#{commodity_group},entry_date=#{entry_date} where product_id=#{product_id}
+	</update>
+	<delete id="delete">
+		delete from product where product_id=#{product_id}
+	</delete>
 </mapper>

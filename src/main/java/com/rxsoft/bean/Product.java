@@ -88,5 +88,6 @@ public class Product {
 		this.commodity_group = commodity_group;
 		this.entry_date = entry_date;
 	}
-	
+
+
 }
