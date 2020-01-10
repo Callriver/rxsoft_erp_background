@@ -44,7 +44,7 @@ public class AttributeController {
 		if (i==1) {
 			jsonObj.setStatus_code(0);
 			jsonObj.setMsg("Success");
-			jsonObj.setData("Success");
+			jsonObj.setData("");
 			
 		}else {
 			jsonObj.setStatus_code(99);

@@ -29,7 +29,7 @@ CREATE TABLE `attribute` (
 
 /*Data for the table `attribute` */
 
-insert  into `attribute`(`attribute_id`,`attribute_name`,`classify_id`) values (1,'今麦郎',1),(2,'鲁香园酱菜',1),(3,'饮料',2),(4,'酒类',2),(5,'面品',2);
+insert  into `attribute`(`attribute_id`,`attribute_name`,`classify_id`) values (1,'今麦郎',1),(2,'鲁香园酱菜',1),(3,'亚太罐头',1),(3,'饮料',2),(4,'可口可乐',1),(4,'酒类',2),(5,'面品',2);
 
 /*Table structure for table `attribute_classify` */
 
@@ -165,7 +165,7 @@ CREATE TABLE `product` (
 
 /*Data for the table `product` */
 
-insert  into `product`(`product_id`,`product_name`,`product_retailprice`,`product_costprice`,`product_deliveryprice`,`product_unit`,`product_image`,`commodity_group`,`entry_date`) values (1,'今麦郎矿泉水','1.00','0.50','0.79',1,'/product/1.jpg',1,'2020-01-09'),(2,'亚太水果罐头','3.00','1.30','1.80',2,'/product/2.jpg',1,'2020-01-09');
+insert  into `product`(`product_id`,`product_name`,`product_retailprice`,`product_costprice`,`product_deliveryprice`,`product_unit`,`product_image`,`commodity_group`,`entry_date`) values (1,'今麦郎矿泉水','1.00','0.50','0.79',1,'/product/1.jpg',1,'2020-01-09'),(2,'亚太水果罐头','3.00','1.30','1.80',2,'/product/2.jpg',1,'2020-01-09'),(3,'雪碧','1.50','3.00','2.20',2,'/product/3.jpg',1,'2020-01-10');
 
 /*Table structure for table `product_attribute` */
 
@@ -179,6 +179,8 @@ CREATE TABLE `product_attribute` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `product_attribute` */
+
+insert  into `product_attribute`(`classify_id`,`product_id`,`attribute_id`) values (1,1,1),(1,3,4);
 
 /*Table structure for table `unit` */
 
