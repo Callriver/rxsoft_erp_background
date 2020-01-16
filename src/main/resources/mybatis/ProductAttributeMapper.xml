@@ -3,37 +3,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rxsoft.dao.ProductAttributeMapper" >
 
-<!-- 
 
-根据商品id和属性分类查询该分类商品所有属性
-SELECT a1.attribute_id,a1.attribute_name
-	FROM product_attribute a,attribute_classify c,product p,attribute a1 
-	WHERE p.product_id=a.product_id 
-		AND c.classify_id=a.classify_id
-		AND a.attribute_id=a1.attribute_id
-		AND a1.classify_id=c.classify_id
-		AND p.product_id=#{product_id}
-		AND c.classify_id=#{classify_id} -->
     <select id="findClassifyById" resultType="AttributeClassify" >
     	<!-- 根据商品id查询商品所有属性分类 -->
     	SELECT c.classify_id,c.classify_name
+			FROM product_attribute a,attribute_classify c,product p
+			WHERE p.product_id=a.product_id 
+				AND c.classify_id=a.classify_id
+				AND a1.classify_id=c.classify_id
+				AND p.product_id=#{product_id}
+    </select>
+    <!-- 根据商品id和属性分类查询该分类商品所有属性 -->
+    <select id="findAttributeById" resultType="Attribute" >
+    	SELECT a1.attribute_id,a1.attribute_name,c.classify_id
 			FROM product_attribute a,attribute_classify c,product p,attribute a1 
 			WHERE p.product_id=a.product_id 
 				AND c.classify_id=a.classify_id
 				AND a.attribute_id=a1.attribute_id
 				AND a1.classify_id=c.classify_id
 				AND p.product_id=#{product_id}
+				AND c.classify_id=#{classify_id}
     </select>
-    <select id="findProductById" resultType="Product" >
-    	select p.product_id,p.product_name,p.product_retailprice,p.product_costprice,p.product_deliveryprice,u.unit_name,p.product_image,p.commodity_group,p.entry_date from product p,unit u where p.product_unit=u.unit_id and product_id=#{product_id}
-    </select>
-    <insert id="add" >
-		insert into product values(#{product_id},#{product_name},#{product_retailprice},#{product_costprice},#{product_deliveryprice},#{product_unit},#{product_image},#{commodity_group},#{entry_date})
+    <!-- 增加商品属性 -->
+    <insert id="addProductAttribute" >
+		insert into product_attribute values(#{classify_id},#{product_id},#{attribute_id})
 	</insert>
-	<update id="update">
-		update product set product_name=#{product_name},product_retailprice=#{product_retailprice},product_costprice=#{product_costprice},product_deliveryprice=#{product_deliveryprice},product_unit=#{product_unit},product_image=#{product_image},commodity_group=#{commodity_group},entry_date=#{entry_date} where product_id=#{product_id}
+	<!-- 修改商品属性 -->
+	<update id="updProductAttribute">
+		update product_attribute set classify_id=#{classify_id},product_id=#{product_id},attribute_id=#{attribute_id} 
+			where classify_id=#{oldclassify_id}
+			 and product_id=#{oldproduct_id}
+			 and attribute_id=#{oldattribute_id}
 	</update>
-	<delete id="delete">
-		delete from product where product_id=#{product_id}
+	<!-- 删除商品属性 -->
+	<delete id="delProductAttribute">
+		delete from product_attribute where classify_id=#{classify_id}
+			 and product_id=#{product_id}
+			 and attribute_id=#{attribute_id}
 	</delete>
 </mapper>
