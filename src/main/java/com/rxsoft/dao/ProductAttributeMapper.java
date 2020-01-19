@@ -13,4 +13,5 @@ public interface ProductAttributeMapper {
     int addProductAttribute(@Param("classify_id")int classify_id,@Param("product_id")int product_id,@Param("attribute_id")int attribute_id);
     int updProductAttribute(@Param("classify_id")int classify_id,@Param("product_id")int product_id,@Param("attribute_id")int attribute_id,
     		@Param("oldclassify_id")int oldclassify_id,@Param("oldproduct_id")int oldproduct_id,@Param("oldattribute_id")int oldattribute_id);
+    int delProductAttribute(@Param("classify_id")int classify_id,@Param("product_id")int product_id,@Param("attribute_id")int attribute_id);
 }

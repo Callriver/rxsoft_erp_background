@@ -30,4 +30,7 @@ public class ProductAttributeService {
 	public int  updProductAttribute(int classify_id,int product_id,int attribute_id,int oldclassify_id,int oldproduct_id,int oldattribute_id) {
 		return mapper.updProductAttribute(classify_id, product_id, attribute_id,oldclassify_id,oldproduct_id,oldattribute_id);
 	}
+	public int  delProductAttribute(int classify_id,int product_id,int attribute_id) {
+		return mapper.delProductAttribute(classify_id, product_id, attribute_id);
+	}
 }

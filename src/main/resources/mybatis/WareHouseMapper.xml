@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rxsoft.dao.WareHouseMapper" >
+
+	<!-- 根据单位查仓库 -->
+    <select id="findWareHouseByDepartmentId" resultType="WareHouse" >
+    	select * from warehouse where department_id=#{department_id}
+    </select>
+    <!-- 根据id查仓库 -->
+    <select id="findWareHouseById" resultType="WareHouse" >
+    	select * from warehouse where warehouse_id=#{warehouse_id}
+    </select>
+    <insert id="add" >
+		insert into product values(#{product_id},#{product_name},#{product_retailprice},#{product_costprice},#{product_deliveryprice},#{product_unit},#{product_image},#{commodity_group},#{entry_date})
+	</insert>
+	<update id="update">
+		update product set product_name=#{product_name},product_retailprice=#{product_retailprice},product_costprice=#{product_costprice},product_deliveryprice=#{product_deliveryprice},product_unit=#{product_unit},product_image=#{product_image},commodity_group=#{commodity_group},entry_date=#{entry_date} where product_id=#{product_id}
+	</update>
+	<delete id="delete">
+		delete from product where product_id=#{product_id}
+	</delete>
+</mapper>

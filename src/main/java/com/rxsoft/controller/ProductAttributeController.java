@@ -89,7 +89,7 @@ public class ProductAttributeController {
 		}
 		return jsonObj;
 	}
-	@RequestMapping(value = "attribute-add",method = RequestMethod.POST)
+	@RequestMapping(value = "attribute-upd",method = RequestMethod.POST)
 	/**
 	 * 修改商品属性
 	 * @param classify_id
@@ -104,6 +104,31 @@ public class ProductAttributeController {
 			@RequestParam("oldclassify_id")int oldclassify_id,@RequestParam("oldproduct_id")int oldproduct_id,@RequestParam("oldattribute_id")int oldattribute_id) {
 		JsonRespObj jsonObj=new JsonRespObj();
 		int i = service.updProductAttribute(classify_id, product_id, attribute_id,oldclassify_id,oldproduct_id,oldattribute_id);
+		if (i!=0) {
+			jsonObj.setStatus_code(0);
+			jsonObj.setMsg("Success");
+			jsonObj.setData("i");
+		}else {
+			jsonObj.setStatus_code(99);
+			jsonObj.setMsg("Service Unavailable");
+			jsonObj.setData("");
+		}
+		return jsonObj;
+	}
+	@RequestMapping(value = "attribute-del",method = RequestMethod.POST)
+	/**
+	 * 删除商品属性
+	 * @param classify_id
+	 * @param product_id
+	 * @param attribute_id
+	 * @param oldclassify_id
+	 * @param oldproduct_id
+	 * @param oldattribute_id
+	 * @return
+	 */
+	public JsonRespObj delProductAttribute(@RequestParam("classify_id")int classify_id,@RequestParam("product_id")int product_id,@RequestParam("attribute_id")int attribute_id) {
+		JsonRespObj jsonObj=new JsonRespObj();
+		int i = service.delProductAttribute(classify_id, product_id, attribute_id);
 		if (i!=0) {
 			jsonObj.setStatus_code(0);
 			jsonObj.setMsg("Success");
